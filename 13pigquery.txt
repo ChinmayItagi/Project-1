@@ -1,0 +1,6 @@
+
+a = load '/home/chinmay/Desktop/crimes.csv' USING PigStorage(',') as  (id:int,caseno:chararray,date:chararray,block:chararray,IUCR:int,type:chararray,desc:chararray,locationdesc:chararray,arrest:chararray,dome:chararray,beat:int,dist:int,ward:int,Coarea:int,code:chararray,xco:int,yco:int,year:int,Upd:chararray,latitude:int,longitude:int,location:chararray);
+b = FILTER a by arrest=='true'AND type=='THEFT';
+c = GROUP b by dist;
+d = FOREACH c GENERATE group,COUNT(b.arrest);
+dump d;
